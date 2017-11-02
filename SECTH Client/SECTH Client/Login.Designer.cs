@@ -28,21 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LoginButton = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.Username = new System.Windows.Forms.TextBox();
             this.Password = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // LoginButton
+            // btnLogin
             // 
-            this.LoginButton.Location = new System.Drawing.Point(316, 362);
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(140, 83);
-            this.LoginButton.TabIndex = 0;
-            this.LoginButton.Text = "Login";
-            this.LoginButton.UseVisualStyleBackColor = true;
+            this.btnLogin.Location = new System.Drawing.Point(316, 362);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(140, 83);
+            this.btnLogin.TabIndex = 0;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // Username
             // 
@@ -85,9 +86,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Username);
-            this.Controls.Add(this.LoginButton);
+            this.Controls.Add(this.btnLogin);
             this.Name = "Login";
             this.Text = "Login";
+            this.Click += new System.EventHandler(this.btnLogin_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,6 +100,6 @@
         private System.Windows.Forms.TextBox Password;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.Button LoginButton;
+        internal System.Windows.Forms.Button btnLogin;
     }
 }
