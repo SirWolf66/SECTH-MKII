@@ -37,7 +37,8 @@ namespace SECTH_Cliënt
 
         public byte[] ConvertToByteArray()
         {
-            return new byte[Convert.ToByte(language) + Convert.ToByte(";;;") + Convert.ToByte(writeTime) + Convert.ToByte(";;;") + Convert.ToByte(author) + Convert.ToByte(";;;") + Convert.ToByte(message)];
+            ASCIIEncoding asen = new ASCIIEncoding();
+            return asen.GetBytes(language + ";;;" + writeTime.ToString() + ";;;" + author + ";;;" + message);            
         }
 
     }
