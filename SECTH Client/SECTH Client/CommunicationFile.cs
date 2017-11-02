@@ -13,6 +13,14 @@ namespace SECTH_Cliënt
         private string language;
         private DateTime writeTime;
 
+        public CummunicationFile(string _language, DateTime _writeTime, string _author, string _message)
+        {
+            author = _author;
+            message = _message;
+            language = _language;
+            writeTime = _writeTime;
+        }
+
         public CummunicationFile(string _author, string _message, string _language, DateTime _writeTime)
         {
             author = _author;
@@ -26,9 +34,10 @@ namespace SECTH_Cliënt
         public string Language { get => language; }
         public DateTime WriteTime { get => writeTime; }
 
+
         public byte[] ConvertToByteArray()
         {
-            return new byte[Convert.ToByte(author) + Convert.ToByte(message) + Convert.ToByte(language) + Convert.ToByte(writeTime)];
+            return new byte[Convert.ToByte(language) + Convert.ToByte(";;;") + Convert.ToByte(writeTime) + Convert.ToByte(";;;") + Convert.ToByte(author) + Convert.ToByte(";;;") + Convert.ToByte(message)];
         }
 
     }

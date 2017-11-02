@@ -13,6 +13,8 @@ namespace SECTH_Cliënt
     class ClientCode
     {
         //https://codeabout.wordpress.com/2011/03/06/building-a-simple-server-client-application-using-c/
+        string clientLanguage = "ENG";
+
 
         IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
         public void Test(string serverIpAdress, string message)
@@ -35,10 +37,13 @@ namespace SECTH_Cliënt
             byte[] bb = new byte[100];
             int k = stm.Read(bb, 0, 100);
 
-            for (int i = 0; i < k; i++)
-            {
-                Console.Write(Convert.ToChar(bb[i]));
-            }
+            
+            string language = Encoding.UTF8.GetString(bb, 0, 3);
+            string[] convertedStringArray = Encoding.UTF8.GetString(bb, 3, bb.Length-3).Split(new string[] { ";;;" }, StringSplitOptions.None);
+            //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
+            CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[0]), convertedStringArray[1], convertedStringArray[2]);
+
+
 
             tcpClient.Close();
         }
