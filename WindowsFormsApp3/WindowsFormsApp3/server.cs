@@ -37,13 +37,18 @@ namespace WindowsFormsApp3
 
         public void ReadData(ClientInfo ci, String text)
         {
-            MessageBox.Show("WORKING?");
+            MessageBox.Show(text);
             Console.WriteLine("Received from " + ci.ID + ": " + text);
             if (text[0] == '!')
                 server.Broadcast(Encoding.UTF8.GetBytes(text));
             else ci.Send(text);
         }
-
+        /*
+         string language = Encoding.UTF8.GetString(bb, 0, 3);
+            string[] convertedStringArray = Encoding.UTF8.GetString(bb, 3, bb.Length-3).Split(new string[] { ";;;" }, StringSplitOptions.None);
+            //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
+            CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[0]), convertedStringArray[1], convertedStringArray[2]);
+        */
         
     }
 }
