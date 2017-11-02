@@ -21,8 +21,16 @@ namespace SECTH_Cliënt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CummunicationFile newMessage = new CummunicationFile("Gilbert", textBox1.Text, "Nederlands", DateTime.Now);
+            string test = textBox1.Text;
+            test = test.Replace("\r\n", "~~");
+            CummunicationFile newMessage = new CummunicationFile("Gilbert", (test + Environment.NewLine) , "Nederlands", DateTime.Now);
+
             richTextBox1.AppendText((newMessage.WriteTime + ", " + newMessage.Language + ": " + newMessage.Author + ": " + newMessage.Message + Environment.NewLine));
+
+            ClientCode clientCode = new ClientCode();
+            //CummunicationFile cummunicationFile = new CummunicationFile("Eng", DateTime.Now, "Mark de Bruyn", richTextBox1.Text);
+            //byte[] bb = cummunicationFile.ConvertToByteArray();
+            clientCode.Test("10.77.128.145", newMessage.ConvertToByteArray());
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -63,7 +71,9 @@ namespace SECTH_Cliënt
         private void button2_Click(object sender, EventArgs e)
         {
             ClientCode clientCode = new ClientCode();
-            clientCode.Test("192.168.56.1", richTextBox1.Text);
+            CummunicationFile cummunicationFile = new CummunicationFile("Eng", DateTime.Now, "Mark de Bruyn", richTextBox1.Text);
+            //byte[] bb = cummunicationFile.ConvertToByteArray();
+            clientCode.Test("10.77.128.145", cummunicationFile.ConvertToByteArray());
         }
     }
 }
