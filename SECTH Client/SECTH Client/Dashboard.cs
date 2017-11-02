@@ -16,5 +16,21 @@ namespace SECTH_Cliënt
         {
             InitializeComponent();
         }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Settings settings = new Settings();
+            settings.FormClosed += (s, args) => this.Close();
+            settings.Show();
+        }
+
+        private void btnMarkTemp_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 mark = new Form1();
+            mark.FormClosed += (s, args) => this.Close();
+            mark.Show();
+        }
     }
 }
