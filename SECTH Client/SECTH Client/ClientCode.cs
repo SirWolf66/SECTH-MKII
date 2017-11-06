@@ -47,12 +47,13 @@ namespace SECTH_Cliënt
             if (language == clientLanguage)
             {
                 string[] convertedStringArray = Encoding.UTF8.GetString(bb, 3, bb.Length - 3).Split(new string[] { ";;;" }, StringSplitOptions.None);
+                convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
                 //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
-                CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[0]), convertedStringArray[1], convertedStringArray[2]);
+                CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
             }
 
 
-            tcpClient.Close();
+            //tcpClient.Close();
         }
 
     }

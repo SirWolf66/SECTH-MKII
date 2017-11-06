@@ -39,19 +39,21 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox1.Location = new System.Drawing.Point(12, 348);
-            this.textBox1.Multiline = true;
+            this.textBox1.Location = new System.Drawing.Point(16, 428);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(469, 45);
+            this.textBox1.Size = new System.Drawing.Size(624, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "lijn 1\r\nlijn 2\r\nlijn 3";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(487, 348);
+            this.button1.Location = new System.Drawing.Point(649, 428);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 45);
+            this.button1.Size = new System.Drawing.Size(187, 55);
             this.button1.TabIndex = 3;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
@@ -60,18 +62,20 @@
             // textBox4
             // 
             this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox4.Location = new System.Drawing.Point(487, 12);
+            this.textBox4.Location = new System.Drawing.Point(649, 15);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(133, 20);
+            this.textBox4.Size = new System.Drawing.Size(176, 22);
             this.textBox4.TabIndex = 4;
             this.textBox4.Text = "search";
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 50);
+            this.richTextBox1.Location = new System.Drawing.Point(17, 62);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(468, 292);
+            this.richTextBox1.Size = new System.Drawing.Size(623, 358);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "Nederlands: Mark: Gilbert zeg eens iets\nNederlands: Gilbert: eh\nNederlands: Mark " +
     "Pirma, dat is iets";
@@ -79,6 +83,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
             this.listBox1.Items.AddRange(new object[] {
             "Gebruikers in Vergadering:",
             "Marie",
@@ -90,17 +95,19 @@
             "Klaas",
             "Jan",
             "Jeane"});
-            this.listBox1.Location = new System.Drawing.Point(487, 50);
+            this.listBox1.Location = new System.Drawing.Point(649, 62);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(133, 290);
+            this.listBox1.Size = new System.Drawing.Size(176, 356);
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(288, 8);
+            this.button2.Location = new System.Drawing.Point(384, 10);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 7;
             this.button2.Text = "test";
             this.button2.UseVisualStyleBackColor = true;
@@ -108,15 +115,16 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 405);
+            this.ClientSize = new System.Drawing.Size(843, 498);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
