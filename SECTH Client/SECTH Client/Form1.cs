@@ -75,5 +75,45 @@ namespace SECTH_Cliënt
             //byte[] bb = cummunicationFile.ConvertToByteArray();
             clientCode.Test("10.77.128.145", cummunicationFile.ConvertToByteArray());
         }
+
+        private void menuChatSettings_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.Show();
+        }
+
+        private void menuChatQuitMain_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Dashboard dash = new Dashboard();
+            dash.FormClosed += (s, args) => this.Close();
+            dash.Show();
+        }
+
+        private void menuChatExit_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo);
+            if(dialogResult == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                
+            }
+        }
+
+        private void menuChatFont_Click(object sender, EventArgs e)
+        {
+            if(fontDialog1.ShowDialog() != DialogResult.Cancel)
+            richTextBox1.Font = fontDialog1.Font;
+            textBox1.Font = fontDialog1.Font;
+            listBox1.Font = fontDialog1.Font;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
