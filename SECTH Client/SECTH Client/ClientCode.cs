@@ -13,36 +13,26 @@ namespace SECTH_Cliënt
     class ClientCode
     {
         //https://codeabout.wordpress.com/2011/03/06/building-a-simple-server-client-application-using-c/
-        string clientLanguage = "ENG";
-
 
         IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
-        public void Test(string serverIpAdress, byte[] message)
+        string clientLanguage = "ENG";
+        TcpClient tcpClient = new TcpClient();
+        Stream stream;
+
+        public ClientCode(string serverIpAdress)
         {
-            TcpClient tcpClient = new TcpClient();
             tcpClient.Connect(serverIpAdress, 2345);
+            stream = tcpClient.GetStream();
+        }
+       
+        
 
-
-
-            String str = Console.ReadLine();
-            Stream stm = tcpClient.GetStream();
-            
-
-            //CummunicationFile communicationFile = new CummunicationFile();
-            //Convert.ToByte(communicationFile);
-
-            ASCIIEncoding asen = new ASCIIEncoding();
-            //byte[] ba = asen.GetBytes(message);
-            byte[] ba = message;
-            Console.WriteLine("Sending...");
-
-            stm.Write(ba, 0, ba.Length);
-            
-
+        public CummunicationFile RecieveMessage()
+        {
             byte[] bb = new byte[10000];
-            int k = stm.Read(bb, 0, 100);
+            int k = stream.Read(bb, 0, 100);
 
-            
+
             string language = Encoding.UTF8.GetString(bb, 0, 3);
             if (language == clientLanguage)
             {
@@ -50,10 +40,31 @@ namespace SECTH_Cliënt
                 convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
                 //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
                 CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
+                return incomingMessage;
             }
+            return new CummunicationFile("ERROR", DateTime.Now, "ERROR", "");
+            
+        }
+               
 
+        
+        public void SendMessage(byte[] message)
+        {            
+            //Stream stm = tcpClient.GetStream();
+            
+            //CummunicationFile communicationFile = new CummunicationFile();
+            //Convert.ToByte(communicationFile);
 
-            //tcpClient.Close();
+            ASCIIEncoding asen = new ASCIIEncoding();
+            //byte[] ba = asen.GetBytes(message);
+            byte[] ba = message;           
+
+            stream.Write(ba, 0, ba.Length);     
+        }
+
+        public void CloseConncetion()
+        {
+            tcpClient.Close();
         }
 
     }

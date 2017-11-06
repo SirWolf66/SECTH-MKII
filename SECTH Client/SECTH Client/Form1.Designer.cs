@@ -48,10 +48,9 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox1.Location = new System.Drawing.Point(12, 348);
-            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(469, 45);
+            this.textBox1.Size = new System.Drawing.Size(469, 20);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "lijn 1\r\nlijn 2\r\nlijn 3";
             // 

@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace SECTH_Cliënt.Properties
 {
 
@@ -25,6 +27,11 @@ namespace SECTH_Cliënt.Properties
             {
                 return defaultInstance;
             }
+        }
+
+        internal void Show()
+        {
+            throw new NotImplementedException();
         }
     }
 }

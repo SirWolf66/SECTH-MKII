@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SECTH_Cliënt.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,25 +13,35 @@ namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
     {
-        
+        ClientCode clientCode = new ClientCode("10.77.153.211");
 
         public Form1()
         {
             InitializeComponent();
+            // work on recieving methode
+            // also after recieve check for language ERROR (indicating a failed file)
+            clientCode.RecieveMessage();
+        }
+
+
+        private void RecieveText()
+        {
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string test = textBox1.Text;
             test = test.Replace("\r\n", "~~");
-            CummunicationFile newMessage = new CummunicationFile("Gilbert", (test + Environment.NewLine) , "Nederlands", DateTime.Now);
+            CummunicationFile newMessage = new CummunicationFile("NED" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
 
             //richTextBox1.AppendText((newMessage.WriteTime + ", " + newMessage.Language + ": " + newMessage.Author + ": " + newMessage.Message + Environment.NewLine));
 
-            ClientCode clientCode = new ClientCode();
+            
             CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", textBox1.Text);
             //byte[] bb = cummunicationFile.ConvertToByteArray();
-            clientCode.Test("10.77.153.211", cummunicationFile.ConvertToByteArray());
+            
+            clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -70,10 +81,10 @@ namespace SECTH_Cliënt
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ClientCode clientCode = new ClientCode();
+            ClientCode clientCode = new ClientCode("10.77.153.211");
             CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", richTextBox1.Text);
             //byte[] bb = cummunicationFile.ConvertToByteArray();
-            clientCode.Test("10.77.153.211", cummunicationFile.ConvertToByteArray());
+            clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

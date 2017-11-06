@@ -21,14 +21,6 @@ namespace SECTH_Cliënt
             writeTime = _writeTime;
         }
 
-        public CummunicationFile(string _author, string _message, string _language, DateTime _writeTime)
-        {
-            author = _author;
-            message = _message;
-            language = _language;
-            writeTime = _writeTime;
-        }
-
         public string Author { get => author; }
         public string Message { get => message; }
         public string Language { get => language; }
