@@ -34,6 +34,14 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuChatMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuChatSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuChatQuitMain = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuChatExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuChatFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -106,6 +114,55 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuChatMenu,
+            this.menuChatFont});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(632, 24);
+            this.menuStrip1.TabIndex = 8;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuChatMenu
+            // 
+            this.menuChatMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuChatSettings,
+            this.menuChatQuitMain,
+            this.menuChatExit});
+            this.menuChatMenu.Name = "menuChatMenu";
+            this.menuChatMenu.Size = new System.Drawing.Size(50, 20);
+            this.menuChatMenu.Text = "Menu";
+            // 
+            // menuChatSettings
+            // 
+            this.menuChatSettings.Name = "menuChatSettings";
+            this.menuChatSettings.Size = new System.Drawing.Size(175, 22);
+            this.menuChatSettings.Text = "Settings";
+            this.menuChatSettings.Click += new System.EventHandler(this.menuChatSettings_Click);
+            // 
+            // menuChatQuitMain
+            // 
+            this.menuChatQuitMain.Name = "menuChatQuitMain";
+            this.menuChatQuitMain.Size = new System.Drawing.Size(175, 22);
+            this.menuChatQuitMain.Text = "Quit to main menu";
+            this.menuChatQuitMain.Click += new System.EventHandler(this.menuChatQuitMain_Click);
+            // 
+            // menuChatExit
+            // 
+            this.menuChatExit.Name = "menuChatExit";
+            this.menuChatExit.Size = new System.Drawing.Size(175, 22);
+            this.menuChatExit.Text = "Exit the application";
+            this.menuChatExit.Click += new System.EventHandler(this.menuChatExit_Click);
+            // 
+            // menuChatFont
+            // 
+            this.menuChatFont.Name = "menuChatFont";
+            this.menuChatFont.Size = new System.Drawing.Size(43, 20);
+            this.menuChatFont.Text = "Font";
+            this.menuChatFont.Click += new System.EventHandler(this.menuChatFont_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,8 +174,13 @@
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,6 +194,13 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuChatMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuChatSettings;
+        private System.Windows.Forms.ToolStripMenuItem menuChatQuitMain;
+        private System.Windows.Forms.ToolStripMenuItem menuChatExit;
+        private System.Windows.Forms.ToolStripMenuItem menuChatFont;
+        private System.Windows.Forms.FontDialog fontDialog1;
     }
 }
 
