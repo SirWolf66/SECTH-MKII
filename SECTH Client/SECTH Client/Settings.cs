@@ -16,5 +16,7 @@ namespace SECTH_Cliënt
         {
             InitializeComponent();
         }
+
+       
     }
 }

@@ -20,6 +20,8 @@ namespace WindowsFormsApp3
 {
     class SimpleServer
     {
+        TextTranslationService textTranslationService = new TextTranslationService();
+        Logger Logger = new Logger(@"C:\Users\Public\Log");
         Server server;
         ClientInfo client;
         public void Start()
@@ -37,18 +39,32 @@ namespace WindowsFormsApp3
 
         public void ReadData(ClientInfo ci, String text)
         {
-            MessageBox.Show(text);
+            string [] textList = text.Split(new string[] { ";;;" }, StringSplitOptions.RemoveEmptyEntries);
+            CummunicationFile commnunicationFile = new CummunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
+
+            //Logger.WriteLog(commnunicationFile);
+            CummunicationFile[] commnunicationFileList = textTranslationService.Translate(commnunicationFile);
+            foreach (CummunicationFile item in commnunicationFileList)
+            {
+                if (item.Language == "ENG")
+                {
+                    // logger second path
+                 //   Logger.WriteLog(item);
+                }
+                server.Broadcast(item.ConvertToByteArray());
+            }
+
+            MessageBox.Show("WORKING?");
             Console.WriteLine("Received from " + ci.ID + ": " + text);
             if (text[0] == '!')
-                server.Broadcast(Encoding.UTF8.GetBytes(text));
-            else ci.Send(text);
+                server.Broadcast(commnunicationFile.ConvertToByteArray());
+            else
+            {
+                ci.Send(commnunicationFile.ConvertToByteArray());
+                //ci.Send(text)
+                    }
         }
-        /*
-         string language = Encoding.UTF8.GetString(bb, 0, 3);
-            string[] convertedStringArray = Encoding.UTF8.GetString(bb, 3, bb.Length-3).Split(new string[] { ";;;" }, StringSplitOptions.None);
-            //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
-            CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[0]), convertedStringArray[1], convertedStringArray[2]);
-        */
+
         
     }
 }

@@ -13,7 +13,12 @@ namespace WindowsFormsApp3
     // key 2: 5becb65e0c0f42f79bd0f6347f4bcca6
     class TextTranslationService
     {
-        
+        public CummunicationFile[] Translate(CummunicationFile cummunicationFile)
+        {
+            CummunicationFile cummunicationFile2 = new CummunicationFile("NED",  cummunicationFile.WriteTime, cummunicationFile.Author, cummunicationFile.Message);
+            CummunicationFile[] cummunicationFileList = { cummunicationFile, cummunicationFile2 };
+            return cummunicationFileList;
+        }
         
     }
 }
