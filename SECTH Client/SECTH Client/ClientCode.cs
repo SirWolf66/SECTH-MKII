@@ -42,7 +42,7 @@ namespace SECTH_Cliënt
         public CummunicationFile RecieveMessage()
         {
             byte[] bb = new byte[10000];
-            int k = stream.Read(bb, 0, 100);
+            int k = stream.Read(bb, 0, 10000);
 
             string language = Encoding.UTF8.GetString(bb, 0, 3);
             if (language == clientLanguage)
