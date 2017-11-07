@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,44 +14,76 @@ namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
     {
-        ClientCode clientCode = new ClientCode("10.77.153.211");
+        ClientCode clientCode = new ClientCode("10.77.133.199");
         CummunicationFile incomingMessage = new CummunicationFile();
         public Form1()
         {
-
+            Thread t = new Thread(new ThreadStart(methodName));
+            t.Start();
             InitializeComponent();
-            
+            //Testefgrf();
+
             //_show += new RecieveText();
             // work on recieving methode
             // also after recieve check for language ERROR (indicating a failed file)
-            clientCode.RecieveMessage();
+            //clientCode.RecieveMessage();            
         }
 
-
-        private void RecieveText()
+        private void methodName()
         {
-            while (clientCode.Connected)
+            while (true)
             {
-                clientCode.RecieveMessage();
+                CummunicationFile result = clientCode.RecieveMessage();
+                if (result.Language != "ERROR")
+                {
+                    Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)); }));
+                    // richTextBox1.Invoke(delegate() { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)); });
+                    // this.Invoke(richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)));
+
+                    //  richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine));
+                }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public async Task MyMethodAsync()
+        {
+            Task<CummunicationFile> longRunningTask = LongRunningOperationAsync();
+            // independent work which doesn't need the result of LongRunningOperationAsync can be done here
+
+            //and now we call await on the task 
+            CummunicationFile result = await longRunningTask;
+            //use the result 
+            if (result.Language != "ERROR")
+            {
+                richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine));
+                
+            }
+            await MyMethodAsync();
+        }
+
+        public async Task<CummunicationFile> LongRunningOperationAsync() // assume we return an int from this long running operation 
+        {
+            CummunicationFile cummunicationFile = clientCode.RecieveMessage();
+            await Task.Delay(1000); // 1 second delay
+            return cummunicationFile;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
         {
             string test = textBox1.Text;
-            test = test.Replace("\r\n", "~~");
+            test = test + Environment.NewLine;
             CummunicationFile newMessage = new CummunicationFile("NED" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
 
             //richTextBox1.AppendText((newMessage.WriteTime + ", " + newMessage.Language + ": " + newMessage.Author + ": " + newMessage.Message + Environment.NewLine));
 
             
-            CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", textBox1.Text);
+            CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", test);
             //byte[] bb = cummunicationFile.ConvertToByteArray();
             
             clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void TextBox4_TextChanged(object sender, EventArgs e)
         {
             HighlightWords(textBox4.Text, richTextBox1);
         }
@@ -75,7 +108,7 @@ namespace SECTH_Cliënt
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!(listBox1.SelectedIndex == 0))
             {
@@ -85,7 +118,7 @@ namespace SECTH_Cliënt
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             ClientCode clientCode = new ClientCode("10.77.153.211");
             CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", richTextBox1.Text);
@@ -93,18 +126,13 @@ namespace SECTH_Cliënt
             clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuChatSettings_Click(object sender, EventArgs e)
+        private void MenuChatSettings_Click(object sender, EventArgs e)
         {
             Settings settings = new Settings();
             settings.Show();
         }
 
-        private void menuChatQuitMain_Click(object sender, EventArgs e)
+        private void MenuChatQuitMain_Click(object sender, EventArgs e)
         {
             this.Hide();
             Dashboard dash = new Dashboard();
@@ -112,7 +140,7 @@ namespace SECTH_Cliënt
             dash.Show();
         }
 
-        private void menuChatExit_Click(object sender, EventArgs e)
+        private void MenuChatExit_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo);
             if(dialogResult == DialogResult.Yes)
@@ -125,7 +153,7 @@ namespace SECTH_Cliënt
             }
         }
 
-        private void menuChatFont_Click(object sender, EventArgs e)
+        private void MenuChatFont_Click(object sender, EventArgs e)
         {
             if(fontDialog1.ShowDialog() != DialogResult.Cancel)
             richTextBox1.Font = fontDialog1.Font;
@@ -133,9 +161,14 @@ namespace SECTH_Cliënt
             listBox1.Font = fontDialog1.Font;
         }
 
+        private async void Testefgrf()
+        {
+            await MyMethodAsync();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

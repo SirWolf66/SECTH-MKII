@@ -52,7 +52,6 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(469, 20);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "lijn 1\r\nlijn 2\r\nlijn 3";
             // 
             // button1
             // 
@@ -62,7 +61,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // textBox4
             // 
@@ -72,7 +71,7 @@
             this.textBox4.Size = new System.Drawing.Size(133, 20);
             this.textBox4.TabIndex = 4;
             this.textBox4.Text = "search";
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.textBox4.TextChanged += new System.EventHandler(this.TextBox4_TextChanged);
             // 
             // richTextBox1
             // 
@@ -101,7 +100,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(133, 290);
             this.listBox1.TabIndex = 6;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -111,7 +110,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "test";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // menuStrip1
             // 
@@ -139,28 +138,28 @@
             this.menuChatSettings.Name = "menuChatSettings";
             this.menuChatSettings.Size = new System.Drawing.Size(175, 22);
             this.menuChatSettings.Text = "Settings";
-            this.menuChatSettings.Click += new System.EventHandler(this.menuChatSettings_Click);
+            this.menuChatSettings.Click += new System.EventHandler(this.MenuChatSettings_Click);
             // 
             // menuChatQuitMain
             // 
             this.menuChatQuitMain.Name = "menuChatQuitMain";
             this.menuChatQuitMain.Size = new System.Drawing.Size(175, 22);
             this.menuChatQuitMain.Text = "Quit to main menu";
-            this.menuChatQuitMain.Click += new System.EventHandler(this.menuChatQuitMain_Click);
+            this.menuChatQuitMain.Click += new System.EventHandler(this.MenuChatQuitMain_Click);
             // 
             // menuChatExit
             // 
             this.menuChatExit.Name = "menuChatExit";
             this.menuChatExit.Size = new System.Drawing.Size(175, 22);
             this.menuChatExit.Text = "Exit the application";
-            this.menuChatExit.Click += new System.EventHandler(this.menuChatExit_Click);
+            this.menuChatExit.Click += new System.EventHandler(this.MenuChatExit_Click);
             // 
             // menuChatFont
             // 
             this.menuChatFont.Name = "menuChatFont";
             this.menuChatFont.Size = new System.Drawing.Size(43, 20);
             this.menuChatFont.Text = "Font";
-            this.menuChatFont.Click += new System.EventHandler(this.menuChatFont_Click);
+            this.menuChatFont.Click += new System.EventHandler(this.MenuChatFont_Click);
             // 
             // Form1
             // 
