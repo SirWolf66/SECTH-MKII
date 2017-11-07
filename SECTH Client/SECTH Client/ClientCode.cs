@@ -10,28 +10,39 @@ using System.Net.Sockets;
 
 namespace SECTH_Cliënt
 {
+
     class ClientCode
     {
+
+
         //https://codeabout.wordpress.com/2011/03/06/building-a-simple-server-client-application-using-c/
 
         IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
         string clientLanguage = "ENG";
         TcpClient tcpClient = new TcpClient();
         Stream stream;
+        
+
+        public bool Connected { get => tcpClient.Connected;}
+
+        public static event EventHandler _show;
 
         public ClientCode(string serverIpAdress)
         {
             tcpClient.Connect(serverIpAdress, 2345);
             stream = tcpClient.GetStream();
+            _show += ClientCode__show;
         }
-       
-        
+
+        private void ClientCode__show(object sender, EventArgs e)
+        {
+            RecieveMessage();
+        }
 
         public CummunicationFile RecieveMessage()
         {
             byte[] bb = new byte[10000];
             int k = stream.Read(bb, 0, 100);
-
 
             string language = Encoding.UTF8.GetString(bb, 0, 3);
             if (language == clientLanguage)
@@ -42,8 +53,7 @@ namespace SECTH_Cliënt
                 CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
                 return incomingMessage;
             }
-            return new CummunicationFile("ERROR", DateTime.Now, "ERROR", "");
-            
+            return new CummunicationFile("ERROR", DateTime.Now, "ERROR", "");            
         }
                
 

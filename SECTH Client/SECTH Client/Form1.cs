@@ -14,10 +14,13 @@ namespace SECTH_Cliënt
     public partial class Form1 : Form
     {
         ClientCode clientCode = new ClientCode("10.77.153.211");
-
+        CummunicationFile incomingMessage = new CummunicationFile();
         public Form1()
         {
+
             InitializeComponent();
+            
+            //_show += new RecieveText();
             // work on recieving methode
             // also after recieve check for language ERROR (indicating a failed file)
             clientCode.RecieveMessage();
@@ -26,7 +29,10 @@ namespace SECTH_Cliënt
 
         private void RecieveText()
         {
-            
+            while (clientCode.Connected)
+            {
+                clientCode.RecieveMessage();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
