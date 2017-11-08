@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BingSpeechToTextService.cs" />
     <Compile Include="ClientCode.cs" />
     <Compile Include="CommunicationFile.cs" />
     <Compile Include="Dashboard.cs">

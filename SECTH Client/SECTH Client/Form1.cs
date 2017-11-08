@@ -10,10 +10,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
     {
+        
+       
         string author;
         string language;
         ClientCode clientCode = new ClientCode("10.77.153.83");
