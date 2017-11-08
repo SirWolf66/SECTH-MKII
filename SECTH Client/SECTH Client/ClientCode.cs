@@ -21,17 +21,14 @@ namespace SECTH_Cliënt
         string clientLanguage = "ENG";
         TcpClient tcpClient = new TcpClient();
         Stream stream;
-        
 
-        public bool Connected { get => tcpClient.Connected;}
 
-        public static event EventHandler _show;
+        public bool Connected { get => tcpClient.Connected; }
 
         public ClientCode(string serverIpAdress)
         {
             tcpClient.Connect(serverIpAdress, 2345);
             stream = tcpClient.GetStream();
-            _show += ClientCode__show;
         }
 
         private void ClientCode__show(object sender, EventArgs e)
@@ -39,7 +36,7 @@ namespace SECTH_Cliënt
             RecieveMessage();
         }
 
-        public CummunicationFile RecieveMessage()
+        public CommunicationFile RecieveMessage()
         {
             byte[] bb = new byte[10000];
             int k = stream.Read(bb, 0, 10000);
@@ -50,10 +47,10 @@ namespace SECTH_Cliënt
                 string[] convertedStringArray = Encoding.UTF8.GetString(bb, 3, bb.Length - 3).Split(new string[] { ";;;" }, StringSplitOptions.None);
                 convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
                 //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
-                CummunicationFile incomingMessage = new CummunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
+                CommunicationFile incomingMessage = new CommunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
                 return incomingMessage;
             }
-            return new CummunicationFile("ERROR", DateTime.Now, "ERROR", "");            
+            return new CommunicationFile("ERROR", DateTime.Now, "ERROR", "");            
         }
                
 

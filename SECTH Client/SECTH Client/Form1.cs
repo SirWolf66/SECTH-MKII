@@ -14,11 +14,12 @@ namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
     {
-        ClientCode clientCode = new ClientCode("10.77.133.199");
-        CummunicationFile incomingMessage = new CummunicationFile();
+        ClientCode clientCode = new ClientCode("10.77.149.118");
+        Speech speech = new Speech();
+
         public Form1()
         {
-            Thread t = new Thread(new ThreadStart(methodName));
+            Thread t = new Thread(new ThreadStart(MethodName));
             t.Start();
             InitializeComponent();
             //Testefgrf();
@@ -29,11 +30,11 @@ namespace SECTH_Cliënt
             //clientCode.RecieveMessage();            
         }
 
-        private void methodName()
+        private void MethodName()
         {
             while (true)
             {
-                CummunicationFile result = clientCode.RecieveMessage();
+                CommunicationFile result = clientCode.RecieveMessage();
                 if (result.Language != "ERROR")
                 {
                     Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)); }));
@@ -47,11 +48,11 @@ namespace SECTH_Cliënt
 
         public async Task MyMethodAsync()
         {
-            Task<CummunicationFile> longRunningTask = LongRunningOperationAsync();
+            Task<CommunicationFile> longRunningTask = LongRunningOperationAsync();
             // independent work which doesn't need the result of LongRunningOperationAsync can be done here
 
             //and now we call await on the task 
-            CummunicationFile result = await longRunningTask;
+            CommunicationFile result = await longRunningTask;
             //use the result 
             if (result.Language != "ERROR")
             {
@@ -61,9 +62,9 @@ namespace SECTH_Cliënt
             await MyMethodAsync();
         }
 
-        public async Task<CummunicationFile> LongRunningOperationAsync() // assume we return an int from this long running operation 
+        public async Task<CommunicationFile> LongRunningOperationAsync() // assume we return an int from this long running operation 
         {
-            CummunicationFile cummunicationFile = clientCode.RecieveMessage();
+            CommunicationFile cummunicationFile = clientCode.RecieveMessage();
             await Task.Delay(1000); // 1 second delay
             return cummunicationFile;
         }
@@ -72,12 +73,12 @@ namespace SECTH_Cliënt
         {
             string test = textBox1.Text;
             test = test + Environment.NewLine;
-            CummunicationFile newMessage = new CummunicationFile("NED" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
+            CommunicationFile newMessage = new CommunicationFile("NED" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
 
             //richTextBox1.AppendText((newMessage.WriteTime + ", " + newMessage.Language + ": " + newMessage.Author + ": " + newMessage.Message + Environment.NewLine));
 
             
-            CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", test);
+            CommunicationFile cummunicationFile = new CommunicationFile("ENG", DateTime.Now, "Mark de Bruyn", test);
             //byte[] bb = cummunicationFile.ConvertToByteArray();
             
             clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
@@ -120,10 +121,8 @@ namespace SECTH_Cliënt
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            ClientCode clientCode = new ClientCode("10.77.153.211");
-            CummunicationFile cummunicationFile = new CummunicationFile("ENG", DateTime.Now, "Mark de Bruyn", richTextBox1.Text);
-            //byte[] bb = cummunicationFile.ConvertToByteArray();
-            clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
+            speech.bfehjvfusdvlsabcuvsdfilvsdkz();
+            speech.vfycvdsub();
         }
 
         private void MenuChatSettings_Click(object sender, EventArgs e)

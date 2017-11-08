@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace SECTH_Cliënt
 {
-    public struct CummunicationFile
+    public struct CommunicationFile
     {
         private string author;
         private string message;
         private string language;
         private DateTime writeTime;
 
-        public CummunicationFile(string _language, DateTime _writeTime, string _author, string _message)
+        public CommunicationFile(string _language, DateTime _writeTime, string _author, string _message)
         {
             author = _author;
             message = _message;
