@@ -27,7 +27,7 @@ namespace WindowsFormsApp3
             }            
         }
 
-        public void WriteLog(CummunicationFile communication)
+        public void WriteLog(CommunicationFile communication)
         {
             StreamWriter logWriter =  File.AppendText(logpath);
             logWriter.Write(communication.WriteTime + ", " + communication.Language + ": "  + communication.Author + ": " + communication.Message + Environment.NewLine);

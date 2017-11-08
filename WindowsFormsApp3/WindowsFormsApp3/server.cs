@@ -40,11 +40,11 @@ namespace WindowsFormsApp3
         public void ReadData(ClientInfo ci, String text)
         {
             string [] textList = text.Split(new string[] { ";;;" }, StringSplitOptions.RemoveEmptyEntries);
-            CummunicationFile commnunicationFile = new CummunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
+            CommunicationFile commnunicationFile = new CommunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
 
             //Logger.WriteLog(commnunicationFile);
-            CummunicationFile[] commnunicationFileList = textTranslationService.Translate(commnunicationFile);
-            foreach (CummunicationFile item in commnunicationFileList)
+            CommunicationFile[] commnunicationFileList = textTranslationService.Translate(commnunicationFile);
+            foreach (CommunicationFile item in commnunicationFileList)
             {
                 if (item.Language == "ENG")
                 {

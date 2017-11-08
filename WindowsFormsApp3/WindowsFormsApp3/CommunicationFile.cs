@@ -3,14 +3,14 @@ using System.Text;
 
 namespace WindowsFormsApp3
 {
-    public struct CummunicationFile
+    public struct CommunicationFile
     {
         private string author;
         private string message;
         private string language;
         private DateTime writeTime;
 
-        public CummunicationFile(string _language, DateTime _writeTime, string _author, string _message)
+        public CommunicationFile(string _language, DateTime _writeTime, string _author, string _message)
         {
             author = _author;
             message = _message;
@@ -18,7 +18,7 @@ namespace WindowsFormsApp3
             writeTime = _writeTime;
         }
 
-        public CummunicationFile(string _author, string _message, string _language, DateTime _writeTime)
+        public CommunicationFile(string _author, string _message, string _language, DateTime _writeTime)
         {
             author = _author;
             message = _message;
