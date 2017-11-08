@@ -16,13 +16,19 @@ namespace SECTH_Cliënt
 
         SpeechRecognitionEngine sre;
 
+
+
+
         public Speech()
         {
-            CultureInfo cultureInfo = new CultureInfo("en-US");
-            sre = new SpeechRecognitionEngine(cultureInfo);
+            CultureInfo cultureInfo = new CultureInfo("en-US",true);
+            
+            sre = new SpeechRecognitionEngine();
+            
+            //sre = new SpeechRecognitionEngine(cultureInfo);
         }
 
-        void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        private void Sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             System.Windows.Forms.MessageBox.Show("Speech recognized: " + e.Result.Text);
         }

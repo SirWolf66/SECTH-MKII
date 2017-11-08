@@ -14,82 +14,61 @@ namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
     {
-        ClientCode clientCode = new ClientCode("10.77.149.118");
+        string author;
+        string language;
+        ClientCode clientCode = new ClientCode("10.77.153.83");
         Speech speech = new Speech();
+
+        public string Author { get => author; set => author = value; }
+        public string Language { get => language; set => language = value; }
 
         public Form1()
         {
             Thread t = new Thread(new ThreadStart(MethodName));
             t.Start();
+            author = "Mark de Bruijn";
+            language = "Dutch";
             InitializeComponent();
-            //Testefgrf();
-
-            //_show += new RecieveText();
-            // work on recieving methode
-            // also after recieve check for language ERROR (indicating a failed file)
-            //clientCode.RecieveMessage();            
         }
 
         private void MethodName()
         {
-            while (true)
+            while (clientCode.Connected)
             {
                 CommunicationFile result = clientCode.RecieveMessage();
                 if (result.Language != "ERROR")
                 {
                     Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)); }));
-                    // richTextBox1.Invoke(delegate() { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)); });
-                    // this.Invoke(richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)));
-
-                    //  richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine));
                 }
             }
         }
 
-        public async Task MyMethodAsync()
-        {
-            Task<CommunicationFile> longRunningTask = LongRunningOperationAsync();
-            // independent work which doesn't need the result of LongRunningOperationAsync can be done here
-
-            //and now we call await on the task 
-            CommunicationFile result = await longRunningTask;
-            //use the result 
-            if (result.Language != "ERROR")
-            {
-                richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine));
-                
-            }
-            await MyMethodAsync();
-        }
-
-        public async Task<CommunicationFile> LongRunningOperationAsync() // assume we return an int from this long running operation 
-        {
-            CommunicationFile cummunicationFile = clientCode.RecieveMessage();
-            await Task.Delay(1000); // 1 second delay
-            return cummunicationFile;
-        }
-
+        /// <summary>
+        /// send button, sends the text to server
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
-            string test = textBox1.Text;
-            test = test + Environment.NewLine;
-            CommunicationFile newMessage = new CommunicationFile("NED" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
-
-            //richTextBox1.AppendText((newMessage.WriteTime + ", " + newMessage.Language + ": " + newMessage.Author + ": " + newMessage.Message + Environment.NewLine));
-
-            
-            CommunicationFile cummunicationFile = new CommunicationFile("ENG", DateTime.Now, "Mark de Bruyn", test);
-            //byte[] bb = cummunicationFile.ConvertToByteArray();
-            
-            clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
+            CommunicationFile newMessage = new CommunicationFile(language, DateTime.Now, author, textBox1.Text + Environment.NewLine);            
+            clientCode.SendMessage(newMessage.ConvertToByteArray());
         }
 
+        /// <summary>
+        /// search box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox4_TextChanged(object sender, EventArgs e)
         {
             HighlightWords(textBox4.Text, richTextBox1);
         }
 
-
+        /// <summary>
+        /// should Highlight what you search, does not work properly
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="textbox"></param>       
         private void HighlightWords(string word, RichTextBox textbox)
         {
                 int startIndex = 0;
@@ -109,6 +88,12 @@ namespace SECTH_Cliënt
             }
         }
 
+        /// <summary>
+        /// should hold all people whom are present in the Convernce,
+        /// this list should be recieved from the server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!(listBox1.SelectedIndex == 0))
@@ -119,6 +104,11 @@ namespace SECTH_Cliënt
             }
         }
 
+        /// <summary>
+        /// this is the textbutton remove when done
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button2_Click(object sender, EventArgs e)
         {
             speech.bfehjvfusdvlsabcuvsdfilvsdkz();
@@ -158,16 +148,6 @@ namespace SECTH_Cliënt
             richTextBox1.Font = fontDialog1.Font;
             textBox1.Font = fontDialog1.Font;
             listBox1.Font = fontDialog1.Font;
-        }
-
-        private async void Testefgrf()
-        {
-            await MyMethodAsync();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-           
         }
     }
 }
