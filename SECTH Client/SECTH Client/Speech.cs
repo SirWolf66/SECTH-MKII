@@ -18,8 +18,8 @@ namespace SECTH_Cliënt
 
         public Speech()
         {
-            CultureInfo cultureInfo = new CultureInfo("en-US");
-            sre = new SpeechRecognitionEngine(cultureInfo);
+            //CultureInfo cultureInfo = new CultureInfo("en-US");
+            //sre = new SpeechRecognitionEngine(cultureInfo);
         }
 
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)

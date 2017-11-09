@@ -18,7 +18,7 @@ namespace SECTH_Cliënt
         //https://codeabout.wordpress.com/2011/03/06/building-a-simple-server-client-application-using-c/
 
         IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
-        string clientLanguage = "ENG";
+        string clientLanguage = "de";
         TcpClient tcpClient = new TcpClient();
         Stream stream;
 
@@ -41,10 +41,10 @@ namespace SECTH_Cliënt
             byte[] bb = new byte[10000];
             int k = stream.Read(bb, 0, 10000);
 
-            string language = Encoding.UTF8.GetString(bb, 0, 3);
+            string language = Encoding.UTF8.GetString(bb, 0, 2);
             if (language == clientLanguage)
             {
-                string[] convertedStringArray = Encoding.UTF8.GetString(bb, 3, bb.Length - 3).Split(new string[] { ";;;" }, StringSplitOptions.None);
+                string[] convertedStringArray = Encoding.UTF8.GetString(bb, 2, bb.Length - 2).Split(new string[] { ";;;" }, StringSplitOptions.None);
                 convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
                 //messages.Split(new string[] { ";;;" }, StringSplitOptions.None);
                 CommunicationFile incomingMessage = new CommunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);

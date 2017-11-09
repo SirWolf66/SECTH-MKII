@@ -14,7 +14,7 @@ namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
     {
-        ClientCode clientCode = new ClientCode("10.77.149.118");
+        ClientCode clientCode = new ClientCode("10.77.136.108");
         Speech speech = new Speech();
 
         public Form1()
@@ -73,12 +73,12 @@ namespace SECTH_Cliënt
         {
             string test = textBox1.Text;
             test = test + Environment.NewLine;
-            CommunicationFile newMessage = new CommunicationFile("NED" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
+            CommunicationFile newMessage = new CommunicationFile("en" , DateTime.Now, "Gilbert", (test + Environment.NewLine));
 
             //richTextBox1.AppendText((newMessage.WriteTime + ", " + newMessage.Language + ": " + newMessage.Author + ": " + newMessage.Message + Environment.NewLine));
 
             
-            CommunicationFile cummunicationFile = new CommunicationFile("ENG", DateTime.Now, "Mark de Bruyn", test);
+            CommunicationFile cummunicationFile = new CommunicationFile("en", DateTime.Now, "Mark de Bruyn", test);
             //byte[] bb = cummunicationFile.ConvertToByteArray();
             
             clientCode.SendMessage(cummunicationFile.ConvertToByteArray());
