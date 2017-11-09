@@ -18,15 +18,19 @@ namespace SECTH_Cliënt
         //https://codeabout.wordpress.com/2011/03/06/building-a-simple-server-client-application-using-c/
 
         IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
-        string clientLanguage = "de";
+        string clientLanguage = "nl";
         TcpClient tcpClient = new TcpClient();
         Stream stream;
 
 
         public bool Connected { get => tcpClient.Connected; }
 
-        public ClientCode(string serverIpAdress)
+        public ClientCode(string serverIpAdress, string language)
         {
+            if (language != string.Empty)
+            {
+                clientLanguage = language;
+            }
             tcpClient.Connect(serverIpAdress, 2345);
             stream = tcpClient.GetStream();
         }
