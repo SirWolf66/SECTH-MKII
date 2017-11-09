@@ -8,6 +8,10 @@ using Microsoft.Bing.Speech;
 using System.Speech;
 using System.Speech.Recognition;
 using System.Globalization;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.IO;
+
 namespace SECTH_Cliënt
 {
     class Speech
@@ -34,11 +38,12 @@ namespace SECTH_Cliënt
 
                 using (var httpClient = new HttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+                  //  httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
                 }
             }
         }
 
+        /*
         public async Task<SpeechResult> RecognizeSpeechAsync(string filename)
         {
 
@@ -55,14 +60,14 @@ namespace SECTH_Cliënt
             fileStream.Dispose();
             return speechResults.results.FirstOrDefault();
         }
-
+        */
         string GenerateRequestUri(string speechEndpoint)
         {
             string requestUri = speechEndpoint;
             requestUri += @"?scenarios=ulm";                                    // websearch is the other option
             requestUri += @"&appid=D4D52672-91D7-4C74-8AD8-42B1D98141A5";       // You must use this ID
             requestUri += @"&locale=en-US";                                     // Other languages supported
-            requestUri += string.Format("&device.os={0}", operatingSystem);     // Open field
+            //requestUri += string.Format("&device.os={0}", operatingSystem);     // Open field
             requestUri += @"&version=3.0";                                      // Required value
             requestUri += @"&format=json";                                      // Required value
             requestUri += @"&instanceid=fe34a4de-7927-4e24-be60-f0629ce1d808";  // GUID for device making the request
@@ -84,7 +89,7 @@ namespace SECTH_Cliënt
             }
         }
 
-
+        /*
         /// <summary>
         /// Gets text from an audio stream.
         /// </summary>
@@ -117,14 +122,15 @@ namespace SECTH_Cliënt
                 }
             }
         }
+        */
 
-        public void Speech()
+        public Speech()
         {
             CultureInfo cultureInfo = new CultureInfo("en-US", true);
 
-            MicrosoftCognitiveSpeechService.GetTextFromAudioAsync();
+           // MicrosoftCognitiveSpeechService.GetTextFromAudioAsync();
             
-
+            /*
             var audioAttachment = activity.Attachments?.FirstOrDefault(a => a.ContentType.Equals("audio/wav"));
             if (audioAttachment != null)
             {
@@ -134,7 +140,7 @@ namespace SECTH_Cliënt
                     var text = await this.speechService.GetTextFromAudioAsync(stream);
                     message = ProcessText(activity.Text, text);
                 }
-            }
+            }*/
 
 
 

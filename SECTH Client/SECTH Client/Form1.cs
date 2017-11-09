@@ -14,13 +14,13 @@ using System.Windows.Forms;
 namespace SECTH_Cliënt
 {
     public partial class Form1 : Form
-    {
-        
-       
-        string author;
-        string language;
-        ClientCode clientCode = new ClientCode("10.77.153.83");
-        Speech speech = new Speech();
+    {     
+        string author = "Director de Bruijn";
+        string language =  "nl";
+        ClientCode clientCode = new ClientCode("10.77.136.108");
+        static string apiKey = "b92b926bdef4432bb1c0ed79844b707e";
+        BingTranslateService bingTranslate = new BingTranslateService(apiKey);
+        //Speech speech = new Speech();
 
         public string Author { get => author; set => author = value; }
         public string Language { get => language; set => language = value; }
@@ -30,7 +30,7 @@ namespace SECTH_Cliënt
             Thread t = new Thread(new ThreadStart(MethodName));
             t.Start();
             author = "Mark de Bruijn";
-            language = "Dutch";
+            language = "nl";
             InitializeComponent();
         }
 
@@ -41,7 +41,7 @@ namespace SECTH_Cliënt
                 CommunicationFile result = clientCode.RecieveMessage();
                 if (result.Language != "ERROR")
                 {
-                    Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine)); }));
+                    Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine + Environment.NewLine));}));
                 }
             }
         }
@@ -114,8 +114,9 @@ namespace SECTH_Cliënt
         /// <param name="e"></param>
         private void Button2_Click(object sender, EventArgs e)
         {
-            speech.bfehjvfusdvlsabcuvsdfilvsdkz();
-            speech.vfycvdsub();
+            var a = bingTranslate.GetAuthorizationTokenAsync();
+            //speech.bfehjvfusdvlsabcuvsdfilvsdkz();
+           // speech.vfycvdsub();
         }
 
         private void MenuChatSettings_Click(object sender, EventArgs e)

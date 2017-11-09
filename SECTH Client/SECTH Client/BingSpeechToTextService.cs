@@ -1,7 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.WebSockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SECTH_Cliënt
@@ -16,6 +21,7 @@ namespace SECTH_Cliënt
         // b92b926bdef4432bb1c0ed79844b707e
         // 2346d467d4fc41b09bfada3f6cb91ae8
 
+            /*
         static void Main(string[] args)
         {
             Task.Run(async () =>
@@ -25,10 +31,8 @@ namespace SECTH_Cliënt
                 var authenticationKey = @"b92b926bdef4432bb1c0ed79844b707e";
                 await bingService.RegisterJob(audioFilePath, authenticationKey);
             }).Wait();
-        }
+        }*/
 
-        public class BingSpeechToTextService
-        {
             #region Private Static Methods
             private static async Task Receiving(ClientWebSocket client)
             {
@@ -46,7 +50,7 @@ namespace SECTH_Cliënt
                     {
                         Console.WriteLine($"Closing ... reason {client.CloseStatusDescription}");
                         var description = client.CloseStatusDescription;
-                        //await client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                        await client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
                         break;
                     }
                     else
@@ -55,7 +59,7 @@ namespace SECTH_Cliënt
                     }
                 }
             }
-        }
+        
          #endregion Private Static Methods 
 
          #region Public Static Methods 
