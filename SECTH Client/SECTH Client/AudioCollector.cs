@@ -8,7 +8,7 @@ namespace SECTH_Cliënt
 {
     class AudioCollector
     {/*
-        private static object play;
+        private static var play;
 
         static void Main(string[] args)
         {

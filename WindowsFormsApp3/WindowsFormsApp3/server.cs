@@ -21,9 +21,11 @@ namespace WindowsFormsApp3
     class SimpleServer
     {
         TextTranslationService textTranslationService = new TextTranslationService();
-        Logger Logger = new Logger(@"C:\Users\Public\Log");
+        Logger Logger = new Logger(@"G:\", "ConfrenceText", false);
+        Logger LoggerRaw = new Logger(@"G:\", "ConfrenceText", true);
         Server server;
         ClientInfo client;
+
         public void Start()
         {
             server = new Server(2345, new ClientEvent(ClientConnect));
@@ -43,7 +45,7 @@ namespace WindowsFormsApp3
             CommunicationFile commnunicationFile = new CommunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
 
             //hereunder shalt be forged the translation component
-            //Logger.WriteLog(commnunicationFile);
+            // LoggerRaw.WriteLog(commnunicationFile);
             List<CommunicationFile> communicationFileList = textTranslationService.Translate(commnunicationFile);
 
 
@@ -52,11 +54,12 @@ namespace WindowsFormsApp3
             {
                 if (item.Language == "en")
                 {
-                    // logger second path
-                 //   Logger.WriteLog(item);
+                     
+                   //  Logger.WriteLog(item);
                 }
                 server.Broadcast(item.ConvertToByteArray());
             }
+            /*
             MessageBox.Show("WORKING?");
             Console.WriteLine("Received from " + ci.ID + ": " + text);
             if (text[0] == '!')
@@ -65,7 +68,7 @@ namespace WindowsFormsApp3
             {
                 ci.Send(commnunicationFile.ConvertToByteArray());
                 //ci.Send(text)
-                    }
+                    }*/
         } 
     }
 }

@@ -1,36 +1,38 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp3
 {
     class Logger
     {
-        string logpath;
-
-        public Logger(string path)
+        string logpath = @"C:\Users\Public\";
+        string filepath;
+        public Logger(string path, string confrenceName, bool raw)
         {
-            if (File.Exists(path))
-            {
-                logpath = path;
+            string addition = raw ? "_Raw" : "_English";
+            string file = path + "_" + DateTime.Now.ToString("yyyy_MM_dd_") + "_" + confrenceName + addition;
+
+            if (!Directory.Exists(path))
+                {
+                Directory.CreateDirectory(path);
+                File.CreateText(file);
             }
             else
             {
-                try
+                if (!File.Exists(file))
                 {
-                    File.Create(path);
-                    logpath = path;
+                    File.CreateText(file);
                 }
-                catch (Exception)
-                {
-                    throw;
-                }                
-            }            
+            }
+            logpath = path;
+            filepath = file;
         }
 
         public void WriteLog(CommunicationFile communication)
         {
-            StreamWriter logWriter =  File.AppendText(logpath);
-            logWriter.Write(communication.WriteTime + ", " + communication.Language + ": "  + communication.Author + ": " + communication.Message + Environment.NewLine);
+            using (StreamWriter logWriter = File.AppendText(filepath))
+            logWriter.Write(communication.WriteTime + ", " + communication.Language + ": " + communication.Author + ": " + communication.Message + Environment.NewLine);
         }
 
     }
