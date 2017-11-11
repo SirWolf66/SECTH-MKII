@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.CognitiveServices.SpeechRecognition;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,15 @@ namespace SECTH_Cliënt
 {
     class BingSpeechToTextService
     {
+        private static String SpeechLocale = "SpeechLocale";
+        private static String LuisApplicationId = "LuisApplicationId";
+        private static String LuisSubscriptionId ="LuisSubscriptionId";
+        private static String BingPrimaryKey = "BingPrimaryKey";
+        private static String BingSecondaryKey = "BingSecondaryKey";
+        //MicrophoneRecognitionClientWithIntent mrcwi;
+        // CreateDataClientWithIntentUsingEndpointUrl
+        //CreateMicrophoneClientWithIntentUsingEndpointUrl()
+            
 
         //https://github.com/maptz/maptz.speechtotext.tool
         //https://stackoverflow.com/questions/45492964/bing-speech-to-text-api-communicate-via-websocket-in-c-sharp
@@ -20,7 +30,17 @@ namespace SECTH_Cliënt
         // accesskeys speech api
         // b92b926bdef4432bb1c0ed79844b707e
         // 2346d467d4fc41b09bfada3f6cb91ae8
-
+        public void test ()
+            
+        {/*
+            mrcwi = SpeechRecognitionServiceFactory.CreateMicrophoneClientWithIntent(
+            SpeechLocale,
+            BingPrimaryKey,
+            BingSecondaryKey,
+            LuisApplicationId,
+            LuisSubscriptionId);
+            mrcwi.AudioStart();*/
+        }
             /*
         static void Main(string[] args)
         {

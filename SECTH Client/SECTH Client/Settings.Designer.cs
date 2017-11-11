@@ -59,7 +59,8 @@
             "ja",
             "es",
             "hi",
-            "ar"});
+            "ar",
+            "zh"});
             this.comboBox1.Location = new System.Drawing.Point(84, 13);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);

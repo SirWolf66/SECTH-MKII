@@ -19,8 +19,8 @@ namespace SECTH_Cliënt
         string language =  "nl";
         string ipAdress = "192:168:56:1";
         ClientCode clientCode;
-        static string apiKey = "b92b926bdef4432bb1c0ed79844b707e";
-        BingTranslateService bingTranslate = new BingTranslateService(apiKey);
+       // static string apiKey = "b92b926bdef4432bb1c0ed79844b707e";
+       // BingTranslateService bingTranslate = new BingTranslateService(apiKey);
         //Speech speech = new Speech();
 
         public Form1(string _author, string _language, string _ipAdress)
@@ -117,18 +117,6 @@ namespace SECTH_Cliënt
                 int startIndex = richTextBox1.Find(": " + userSearch + ": " );
                 HighlightWords((": " + userSearch + ": "), richTextBox1);
             }
-        }
-
-        /// <summary>
-        /// this is the textbutton remove when done
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            var a = bingTranslate.GetAuthorizationTokenAsync();
-            //speech.bfehjvfusdvlsabcuvsdfilvsdkz();
-           // speech.vfycvdsub();
         }
 
         private void MenuChatSettings_Click(object sender, EventArgs e)

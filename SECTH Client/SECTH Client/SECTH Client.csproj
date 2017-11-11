@@ -82,9 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioCollector.cs" />
-    <Compile Include="BingSpeechToTextService.cs" />
-    <Compile Include="BingTranslateService.cs" />
     <Compile Include="ClientCode.cs" />
     <Compile Include="CommunicationFile.cs" />
     <Compile Include="Dashboard.cs">
@@ -113,7 +110,6 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Speech.cs" />
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>

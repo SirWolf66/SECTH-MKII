@@ -21,10 +21,19 @@ namespace WindowsFormsApp3
         public List<CommunicationFile> Translate(CommunicationFile communicationFile)
         {
             List<CommunicationFile> communicationFileList = new List<CommunicationFile>();
-            string[] languageList = { "en", "de", "nl", "ja", "es", "hi", "ar" };
+            string[] languageList = { "en", "de", "nl", "ja", "es", "hi", "ar", "zh-CHS" };
             foreach (string lang in languageList)
             {
-                CommunicationFile newCommunicationFile = new CommunicationFile(lang, communicationFile.WriteTime, communicationFile.Author, Translate(lang, communicationFile.Message));
+                string language;
+                if (lang == "zh-CHS")
+                {
+                    language = "zh";
+                }
+                else
+                {
+                    language = lang;
+                }
+                CommunicationFile newCommunicationFile = new CommunicationFile(language, communicationFile.WriteTime, communicationFile.Author, Translate(lang, communicationFile.Message));
                 communicationFileList.Add(newCommunicationFile);
             }
             return communicationFileList;
