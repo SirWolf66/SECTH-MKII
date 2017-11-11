@@ -21,7 +21,7 @@ namespace WindowsFormsApp3
         public List<CommunicationFile> Translate(CommunicationFile communicationFile)
         {
             List<CommunicationFile> communicationFileList = new List<CommunicationFile>();
-            string[] languageList = { "en", "de", "nl", "ja" };
+            string[] languageList = { "en", "de", "nl", "ja", "es", "hi", "ar" };
             foreach (string lang in languageList)
             {
                 CommunicationFile newCommunicationFile = new CommunicationFile(lang, communicationFile.WriteTime, communicationFile.Author, Translate(lang, communicationFile.Message));

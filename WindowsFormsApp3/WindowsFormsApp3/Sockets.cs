@@ -155,8 +155,8 @@ namespace RedCorona.Net {
 //			t.t.Start();
 			if((encType == EncryptionType.None) && (!sentReady)) {
 				sentReady = true;
-				if(OnReady != null) OnReady(this);
-			}
+                OnReady?.Invoke(this);
+            }
 			sock.BeginReceive(buf, 0, BUFSIZE, 0, new AsyncCallback(ReadCallback), this);
 		}
 		
@@ -244,8 +244,8 @@ namespace RedCorona.Net {
 			int read;
 			while(sock.Available != 0){
 				read = sock.Receive(buf);
-				if(OnReadBytes != null) OnReadBytes(this, buf, read);
-				buffer += Encoding.UTF8.GetString(buf, 0, read);
+                OnReadBytes?.Invoke(this, buf, read);
+                buffer += Encoding.UTF8.GetString(buf, 0, read);
 			}
 		}
 		
@@ -509,8 +509,8 @@ namespace RedCorona.Net {
 			encryptor = MakeEncryptor();	
 			decryptor = MakeDecryptor();
 			encComplete = true;
-			if(OnReady != null) OnReady(this);
-		}
+            OnReady?.Invoke(this);
+        }
 			
 		public static byte[] GetLengthEncodedVector(byte[] from){
 			int l = from.Length;

@@ -17,20 +17,32 @@ namespace SECTH_Cliënt
     {     
         string author = "Director de Bruijn";
         string language =  "nl";
-        ClientCode clientCode = new ClientCode("10.77.136.108");
+        string ipAdress = "192:168:56:1";
+        ClientCode clientCode;
         static string apiKey = "b92b926bdef4432bb1c0ed79844b707e";
         BingTranslateService bingTranslate = new BingTranslateService(apiKey);
         //Speech speech = new Speech();
 
-        public string Author { get => author; set => author = value; }
-        public string Language { get => language; set => language = value; }
-
-        public Form1()
-        {
+        public Form1(string _author, string _language, string _ipAdress)
+        {   
+            if (!(_author == string.Empty))
+            {
+                author = _author;
+            }
+            if (!(_language == string.Empty))
+            {
+                  language = _language;
+            }
+            if (!(_ipAdress == string.Empty))
+            {
+                clientCode = new ClientCode(_ipAdress, language);
+            }
+            else
+            {
+                clientCode = new ClientCode(ipAdress, language);
+            }
             Thread t = new Thread(new ThreadStart(MethodName));
             t.Start();
-            author = "Mark de Bruijn";
-            language = "nl";
             InitializeComponent();
         }
 

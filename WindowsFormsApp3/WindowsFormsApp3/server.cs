@@ -21,8 +21,8 @@ namespace WindowsFormsApp3
     class SimpleServer
     {
         TextTranslationService textTranslationService = new TextTranslationService();
-        Logger Logger = new Logger(@"G:\", "ConfrenceText", false);
-        Logger LoggerRaw = new Logger(@"G:\", "ConfrenceText", true);
+        Logger Logger = new Logger(@"C:\Users\Public\", "TestConfrence" , false);
+        Logger LoggerRaw = new Logger(@"C:\Users\Public\", "TestConfrence", true);
         Server server;
         ClientInfo client;
 
@@ -39,13 +39,18 @@ namespace WindowsFormsApp3
             
         }
 
+        public void CloseServer()
+        {
+            server.Close();
+        }
+
         public void ReadData(ClientInfo ci, String text)
         {
             string [] textList = text.Split(new string[] { ";;;" }, StringSplitOptions.RemoveEmptyEntries);
             CommunicationFile commnunicationFile = new CommunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
 
             //hereunder shalt be forged the translation component
-            // LoggerRaw.WriteLog(commnunicationFile);
+            LoggerRaw.WriteLog(commnunicationFile);
             List<CommunicationFile> communicationFileList = textTranslationService.Translate(commnunicationFile);
 
 
@@ -53,22 +58,13 @@ namespace WindowsFormsApp3
                                                                           communicationfile is een list van allen communicationfiles die overeenkomen met elke taal*/
             {
                 if (item.Language == "en")
-                {
-                     
-                   //  Logger.WriteLog(item);
+                {                     
+                   Logger.WriteLog(item);
                 }
                 server.Broadcast(item.ConvertToByteArray());
             }
-            /*
-            MessageBox.Show("WORKING?");
-            Console.WriteLine("Received from " + ci.ID + ": " + text);
-            if (text[0] == '!')
-                server.Broadcast(commnunicationFile.ConvertToByteArray());
-            else
-            {
-                ci.Send(commnunicationFile.ConvertToByteArray());
-                //ci.Send(text)
-                    }*/
+            
+
         } 
     }
 }

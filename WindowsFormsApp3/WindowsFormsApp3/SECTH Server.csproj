@@ -56,7 +56,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="server.cs" />
-    <Compile Include="ServerCode.cs" />
     <Compile Include="Sockets.cs" />
     <Compile Include="TextTranslationService.cs" />
     <EmbeddedResource Include="Form1.resx">

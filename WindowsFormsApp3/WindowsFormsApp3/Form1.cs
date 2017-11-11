@@ -12,6 +12,7 @@ namespace WindowsFormsApp3
 {
     public partial class Form1 : Form
     {
+        SimpleServer simpleServer = new SimpleServer();
         public Form1()
         {
             InitializeComponent();
@@ -24,10 +25,14 @@ namespace WindowsFormsApp3
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            SimpleServer simpleServer = new SimpleServer();
+        {           
             simpleServer.Start();
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            simpleServer.CloseServer();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WindowsFormsApp3
         public Logger(string path, string confrenceName, bool raw)
         {
             string addition = raw ? "_Raw" : "_English";
-            string file = path + "_" + DateTime.Now.ToString("yyyy_MM_dd_") + "_" + confrenceName + addition;
+            string file = path + "_" + DateTime.Now.ToString("yyyy_MM_dd_") + "_" + confrenceName + addition + ".txt";
 
             if (!Directory.Exists(path))
                 {
