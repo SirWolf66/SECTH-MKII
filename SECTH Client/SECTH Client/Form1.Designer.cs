@@ -78,8 +78,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(468, 292);
             this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "Nederlands: Mark: Gilbert zeg eens iets\nNederlands: Gilbert: eh\nNederlands: Mark " +
-    "Pirma, dat is iets";
+            this.richTextBox1.Text = "";
             // 
             // listBox1
             // 

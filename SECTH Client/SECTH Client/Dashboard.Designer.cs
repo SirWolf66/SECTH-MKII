@@ -43,6 +43,7 @@
             this.btnJoinConference.TabIndex = 0;
             this.btnJoinConference.Text = "Deelnemen aan vergadering";
             this.btnJoinConference.UseVisualStyleBackColor = true;
+            this.btnJoinConference.Click += new System.EventHandler(this.btnJoinConference_Click);
             // 
             // btnCreateConference
             // 
@@ -73,6 +74,7 @@
             this.btnMarkTemp.TabIndex = 3;
             this.btnMarkTemp.Text = "Mark\'s chatvenster (temp)";
             this.btnMarkTemp.UseVisualStyleBackColor = true;
+            this.btnMarkTemp.Visible = false;
             this.btnMarkTemp.Click += new System.EventHandler(this.btnMarkTemp_Click);
             // 
             // Dashboard
