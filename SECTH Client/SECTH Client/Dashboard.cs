@@ -27,7 +27,7 @@ namespace SECTH_Cliënt
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            using (Settings settings = new Settings())
+            using (Settings settings = new Settings(author,language,ipadress))
             {
                 if (settings.ShowDialog() == DialogResult.OK)
                 {
@@ -42,6 +42,15 @@ namespace SECTH_Cliënt
         {
             this.Hide();
             Form1 mark = new Form1(Author,Language,Ipadress);
+            mark.FormClosed += (s, args) => this.Close();
+            mark.Show();
+        }
+
+        private void btnJoinConference_Click(object sender, EventArgs e)
+        {
+            
+            this.Hide();
+            Form1 mark = new Form1(Author, Language, Ipadress);
             mark.FormClosed += (s, args) => this.Close();
             mark.Show();
         }

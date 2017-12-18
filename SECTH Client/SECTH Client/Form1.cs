@@ -121,7 +121,7 @@ namespace SECTH_Cliënt
 
         private void MenuChatSettings_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings();
+            Settings settings = new Settings(author, language, ipAdress);
             settings.Show();
         }
 

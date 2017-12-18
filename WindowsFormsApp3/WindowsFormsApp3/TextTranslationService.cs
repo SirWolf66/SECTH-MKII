@@ -43,7 +43,7 @@ namespace WindowsFormsApp3
         //static readonly string TRANSLATETO = "de";
         static string Translate(string language, string input)
         {
-            string APIKEY = "57594cf0272d428cbd945e4978c8e70e";
+            string APIKEY = "6aabe3d7be3e49d39b5bb03edf35feb1";
             string output = "";
             //string input = "Alstublieft meneer mr Gates sama vertaal deze tekst hier.";
             Task.Run(async () =>
