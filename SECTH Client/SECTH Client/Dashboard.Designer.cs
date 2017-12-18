@@ -54,6 +54,7 @@
             this.btnCreateConference.TabIndex = 1;
             this.btnCreateConference.Text = "Vergadering aanmaken";
             this.btnCreateConference.UseVisualStyleBackColor = true;
+            this.btnCreateConference.Visible = false;
             // 
             // btnSettings
             // 

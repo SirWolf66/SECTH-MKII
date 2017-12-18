@@ -90,7 +90,6 @@
             this.Controls.Add(this.btnLogin);
             this.Name = "Login";
             this.Text = "Login";
-            this.Click += new System.EventHandler(this.btnLogin_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
