@@ -57,7 +57,7 @@ namespace WindowsFormsApp3
                 userList.Add(commnunicationFile);
                 foreach (CommunicationFile item in userList)
                 {
-                    server.Broadcast(commnunicationFile.ConvertToByteArray());
+                    server.Broadcast(item.ConvertToByteArray());
                 }
             }
             else
