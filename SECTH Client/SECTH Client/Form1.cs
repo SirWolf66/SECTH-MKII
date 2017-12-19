@@ -55,11 +55,17 @@ namespace SECTH_Cliënt
                 CommunicationFile result = clientCode.RecieveMessage();
                 if (result.Language == joincode)
                 {
-                    Invoke(new MethodInvoker(delegate () { usersBox.Items.Add(result.Author); }));
+                    if (!usersBox.Items.Contains(result.Author))
+                    {
+                        Invoke(new MethodInvoker(delegate () { usersBox.Items.Add(result.Author); }));
+                    }                    
                 }
                 else if (result.Language == leavecode)
                 {
-                    Invoke(new MethodInvoker(delegate () { usersBox.Items.Remove(result.Author); }));
+                    if (usersBox.Items.Contains(result.Author))
+                    {
+                        Invoke(new MethodInvoker(delegate () { usersBox.Items.Remove(result.Author); }));
+                    }                    
                 }
                 else if (result.Language != "ERROR")
                 {

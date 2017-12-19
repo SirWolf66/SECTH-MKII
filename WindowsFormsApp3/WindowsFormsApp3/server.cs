@@ -25,6 +25,7 @@ namespace WindowsFormsApp3
         Logger LoggerRaw = new Logger(@"C:\Users\Public\", "TestConfrence", true);
         Server server;
         ClientInfo client;
+        List<CommunicationFile> userList = new List<CommunicationFile>();
 
         public void Start()
         {
@@ -53,7 +54,11 @@ namespace WindowsFormsApp3
             {
                 LoggerRaw.WriteLog(commnunicationFile);
                 Logger.WriteLog(commnunicationFile);
-                server.Broadcast(commnunicationFile.ConvertToByteArray());
+                userList.Add(commnunicationFile);
+                foreach (CommunicationFile item in userList)
+                {
+                    server.Broadcast(commnunicationFile.ConvertToByteArray());
+                }
             }
             else
             {

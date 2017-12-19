@@ -48,7 +48,7 @@ namespace SECTH_Cliënt
             int k = stream.Read(bb, 0, 10000);
 
             string language = Encoding.UTF8.GetString(bb, 0, 2);
-            if (language == clientLanguage || language == joincode)
+            if (language == clientLanguage || language == joincode || language == leavecode)
             {
                 string[] convertedStringArray = Encoding.UTF8.GetString(bb, 2, bb.Length - 2).Split(new string[] { ";;;" }, StringSplitOptions.None);
                 convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
