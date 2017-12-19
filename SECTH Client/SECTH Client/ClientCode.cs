@@ -48,18 +48,29 @@ namespace SECTH_Cliënt
 
         public CommunicationFile RecieveMessage()
         {
-            byte[] bb = new byte[10000];
-            int k = stream.Read(bb, 0, 10000);
-
-            string language = Encoding.UTF8.GetString(bb, 0, 2);
-            if (language == clientLanguage || language == joincode || language == leavecode)
+            if (Connected)
             {
-                string[] convertedStringArray = Encoding.UTF8.GetString(bb, 2, bb.Length - 2).Split(new string[] { ";;;" }, StringSplitOptions.None);
-                convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
-                CommunicationFile incomingMessage = new CommunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
-                return incomingMessage;
+                byte[] bb = new byte[10000];
+                try
+                {
+                    int k = stream.Read(bb, 0, 10000);
+                }
+                catch (Exception)
+                {
+
+                }             
+
+                string language = Encoding.UTF8.GetString(bb, 0, 2);
+                if (language == clientLanguage || language == joincode || language == leavecode)
+                {
+                    string[] convertedStringArray = Encoding.UTF8.GetString(bb, 2, bb.Length - 2).Split(new string[] { ";;;" }, StringSplitOptions.None);
+                    convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
+                    CommunicationFile incomingMessage = new CommunicationFile(language, Convert.ToDateTime(convertedStringArray[1]), convertedStringArray[2], convertedStringArray[3]);
+                    return incomingMessage;
+                }
             }
-            return new CommunicationFile("ERROR", DateTime.Now, "ERROR", "");            
+            return new CommunicationFile("ERROR", DateTime.Now, "ERROR", "");     
+                
         }
                
 
@@ -75,8 +86,12 @@ namespace SECTH_Cliënt
 
         public void CloseConncetion(string autor)
         {
+            
             systemMessage = new CommunicationFile(leavecode, DateTime.Now, autor, "");
             SendMessage(systemMessage.ConvertToByteArray());
+            stream.Flush();
+            stream.Dispose();
+            stream.Close();
             tcpClient.Close();
         }
 

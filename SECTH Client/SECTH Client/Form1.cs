@@ -145,6 +145,7 @@ namespace SECTH_Cliënt
 
         private void MenuChatQuitMain_Click(object sender, EventArgs e)
         {
+            clientCode.CloseConncetion(author);            
             this.Hide();
             Dashboard dash = new Dashboard();
             dash.FormClosed += (s, args) => this.Close();
@@ -156,6 +157,7 @@ namespace SECTH_Cliënt
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo);
             if(dialogResult == DialogResult.Yes)
             {
+                clientCode.CloseConncetion(author);
                 Application.Exit();
             }
             else if (dialogResult == DialogResult.No)
