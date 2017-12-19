@@ -25,7 +25,7 @@ namespace SECTH_Cliënt
 
         public bool Connected { get => tcpClient.Connected; }
 
-        public ClientCode(string serverIpAdress, string language, string autor)
+        public ClientCode(string serverIpAdress, string language)
         {
             if (language != string.Empty)
             {
@@ -33,6 +33,10 @@ namespace SECTH_Cliënt
             }
             tcpClient.Connect(serverIpAdress, 2345);
             stream = tcpClient.GetStream();
+        }
+
+        public void StartMessage(string autor)
+        {
             systemMessage = new CommunicationFile(joincode, DateTime.Now, autor, Environment.NewLine);
             SendMessage(systemMessage.ConvertToByteArray());
         }

@@ -37,15 +37,16 @@ namespace SECTH_Cliënt
             }
             if (!(_ipAdress == string.Empty))
             {
-                clientCode = new ClientCode(_ipAdress, language, author);
+                clientCode = new ClientCode(_ipAdress, language);
             }
             else
             {
-                clientCode = new ClientCode(ipAdress, language, author);
+                clientCode = new ClientCode(ipAdress, language);
             }
             Thread t = new Thread(new ThreadStart(MethodName));
             t.Start();
             InitializeComponent();
+            clientCode.StartMessage(author);
         }
 
         private void MethodName()
