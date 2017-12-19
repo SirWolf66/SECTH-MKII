@@ -32,7 +32,17 @@ namespace WindowsFormsApp3
         public void WriteLog(CommunicationFile communication)
         {
             using (StreamWriter logWriter = File.AppendText(filepath))
-            logWriter.Write(communication.WriteTime + ", " + communication.Language + ": " + communication.Author + ": " + communication.Message + Environment.NewLine);
+                if (communication.Language == "++" || communication.Language == "--")
+                {
+                    string temp = (communication.Language == "++") ? " has joined" : " has left";
+                    logWriter.Write(communication.WriteTime + ", " + communication.Author + temp + Environment.NewLine);
+
+                }
+                else
+                {
+                    logWriter.Write(communication.WriteTime + ", " + communication.Language + ": " + communication.Author + ": " + communication.Message + Environment.NewLine);
+
+                }
         }
 
     }

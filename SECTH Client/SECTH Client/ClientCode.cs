@@ -13,18 +13,19 @@ namespace SECTH_Cliënt
 
     class ClientCode
     {
-
-
         //https://codeabout.wordpress.com/2011/03/06/building-a-simple-server-client-application-using-c/
 
         IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
+        CommunicationFile systemMessage;
         string clientLanguage = "nl";
+        string joincode = "++";
+        string leavecode = "--";
         TcpClient tcpClient = new TcpClient();
         Stream stream;
 
         public bool Connected { get => tcpClient.Connected; }
 
-        public ClientCode(string serverIpAdress, string language)
+        public ClientCode(string serverIpAdress, string language, string autor)
         {
             if (language != string.Empty)
             {
@@ -32,6 +33,8 @@ namespace SECTH_Cliënt
             }
             tcpClient.Connect(serverIpAdress, 2345);
             stream = tcpClient.GetStream();
+            systemMessage = new CommunicationFile(joincode, DateTime.Now, autor, Environment.NewLine);
+            SendMessage(systemMessage.ConvertToByteArray());
         }
 
         private void ClientCode__show(object sender, EventArgs e)
@@ -45,7 +48,7 @@ namespace SECTH_Cliënt
             int k = stream.Read(bb, 0, 10000);
 
             string language = Encoding.UTF8.GetString(bb, 0, 2);
-            if (language == clientLanguage)
+            if (language == clientLanguage || language == joincode)
             {
                 string[] convertedStringArray = Encoding.UTF8.GetString(bb, 2, bb.Length - 2).Split(new string[] { ";;;" }, StringSplitOptions.None);
                 convertedStringArray[3] = convertedStringArray[3].Replace("\0", "");
@@ -66,8 +69,10 @@ namespace SECTH_Cliënt
             stream.Write(ba, 0, ba.Length);     
         }
 
-        public void CloseConncetion()
+        public void CloseConncetion(string autor)
         {
+            systemMessage = new CommunicationFile(leavecode, DateTime.Now, autor, "");
+            SendMessage(systemMessage.ConvertToByteArray());
             tcpClient.Close();
         }
 

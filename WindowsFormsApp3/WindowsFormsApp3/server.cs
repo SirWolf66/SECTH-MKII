@@ -49,21 +49,27 @@ namespace WindowsFormsApp3
             string [] textList = text.Split(new string[] { ";;;" }, StringSplitOptions.RemoveEmptyEntries);
             CommunicationFile commnunicationFile = new CommunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
 
-            //hereunder shalt be forged the translation component
-            LoggerRaw.WriteLog(commnunicationFile);
-            List<CommunicationFile> communicationFileList = textTranslationService.Translate(commnunicationFile);
-
-
-            foreach (CommunicationFile item in communicationFileList) /* translate the inhoud van het bericht en veranderen taal naar vertaalde taal hierboven doen 
-                                                                          communicationfile is een list van allen communicationfiles die overeenkomen met elke taal*/
+            if (commnunicationFile.Language == "++" || commnunicationFile.Language == "--")
             {
-                if (item.Language == "en")
-                {                     
-                   Logger.WriteLog(item);
-                }
-                server.Broadcast(item.ConvertToByteArray());
+                LoggerRaw.WriteLog(commnunicationFile);
+                Logger.WriteLog(commnunicationFile);
+                server.Broadcast(commnunicationFile.ConvertToByteArray());
             }
-            
+            else
+            {
+                LoggerRaw.WriteLog(commnunicationFile);
+                List<CommunicationFile> communicationFileList = textTranslationService.Translate(commnunicationFile);
+                foreach (CommunicationFile item in communicationFileList) /* translate the inhoud van het bericht en veranderen taal naar vertaalde taal hierboven doen 
+                                                                          communicationfile is een list van allen communicationfiles die overeenkomen met elke taal*/
+                {
+                    if (item.Language == "en")
+                    {
+                        Logger.WriteLog(item);
+                    }
+                    server.Broadcast(item.ConvertToByteArray());
+                }
+            }
+            //hereunder shalt be forged the translation component          
 
         } 
     }

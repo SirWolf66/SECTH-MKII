@@ -18,6 +18,8 @@ namespace SECTH_Cliënt
         string author = "Director de Bruijn";
         string language =  "nl";
         string ipAdress = "192:168:56:1";
+        string joincode = "++";
+        string leavecode = "--";
         ClientCode clientCode;
        // static string apiKey = "b92b926bdef4432bb1c0ed79844b707e";
        // BingTranslateService bingTranslate = new BingTranslateService(apiKey);
@@ -35,11 +37,11 @@ namespace SECTH_Cliënt
             }
             if (!(_ipAdress == string.Empty))
             {
-                clientCode = new ClientCode(_ipAdress, language);
+                clientCode = new ClientCode(_ipAdress, language, author);
             }
             else
             {
-                clientCode = new ClientCode(ipAdress, language);
+                clientCode = new ClientCode(ipAdress, language, author);
             }
             Thread t = new Thread(new ThreadStart(MethodName));
             t.Start();
@@ -51,9 +53,17 @@ namespace SECTH_Cliënt
             while (clientCode.Connected)
             {
                 CommunicationFile result = clientCode.RecieveMessage();
-                if (result.Language != "ERROR")
+                if (result.Language == joincode)
                 {
-                    Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine + Environment.NewLine));}));
+                    Invoke(new MethodInvoker(delegate () { usersBox.Items.Add(result.Author); }));
+                }
+                else if (result.Language == leavecode)
+                {
+                    Invoke(new MethodInvoker(delegate () { usersBox.Items.Remove(result.Author); }));
+                }
+                else if (result.Language != "ERROR")
+                {
+                    Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine + Environment.NewLine)); }));
                 }
             }
         }
@@ -111,12 +121,13 @@ namespace SECTH_Cliënt
         /// <param name="e"></param>
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!(listBox1.SelectedIndex == 0))
+            /*
+            if (!(usersBox.SelectedIndex == 0))
             {
-                string userSearch = listBox1.SelectedItem.ToString();
+                string userSearch = usersBox.SelectedItem.ToString();
                 int startIndex = richTextBox1.Find(": " + userSearch + ": " );
                 HighlightWords((": " + userSearch + ": "), richTextBox1);
-            }
+            }*/
         }
 
         private void MenuChatSettings_Click(object sender, EventArgs e)
@@ -151,7 +162,7 @@ namespace SECTH_Cliënt
             if(fontDialog1.ShowDialog() != DialogResult.Cancel)
             richTextBox1.Font = fontDialog1.Font;
             textBox1.Font = fontDialog1.Font;
-            listBox1.Font = fontDialog1.Font;
+            usersBox.Font = fontDialog1.Font;
         }
     }
 }
