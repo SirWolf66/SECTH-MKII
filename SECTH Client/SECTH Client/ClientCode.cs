@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-
+using System.Threading;
 
 namespace SECTH_Cliënt
 {
@@ -89,6 +89,8 @@ namespace SECTH_Cliënt
             
             systemMessage = new CommunicationFile(leavecode, DateTime.Now, autor, "");
             SendMessage(systemMessage.ConvertToByteArray());
+            int milliseconds = 2000;
+            Thread.Sleep(milliseconds);
             stream.Flush();
             stream.Dispose();
             stream.Close();

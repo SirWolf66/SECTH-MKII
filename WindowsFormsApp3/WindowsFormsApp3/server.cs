@@ -50,7 +50,7 @@ namespace WindowsFormsApp3
             string [] textList = text.Split(new string[] { ";;;" }, StringSplitOptions.RemoveEmptyEntries);
             CommunicationFile commnunicationFile = new CommunicationFile(textList[0], Convert.ToDateTime(textList[1]), textList[2], textList[3]);
 
-            if (commnunicationFile.Language == "++" || commnunicationFile.Language == "--")
+            if (commnunicationFile.Language == "++" )
             {
                 LoggerRaw.WriteLog(commnunicationFile);
                 Logger.WriteLog(commnunicationFile);
@@ -58,7 +58,16 @@ namespace WindowsFormsApp3
                 foreach (CommunicationFile item in userList)
                 {
                     server.Broadcast(item.ConvertToByteArray());
+                    int milliseconds = 2000;
+                    Thread.Sleep(milliseconds);
                 }
+            }
+            else if (commnunicationFile.Language == "--")
+            {
+                userList.Remove(commnunicationFile);
+                LoggerRaw.WriteLog(commnunicationFile);
+                Logger.WriteLog(commnunicationFile);
+                server.Broadcast(commnunicationFile.ConvertToByteArray());
             }
             else
             {
