@@ -15,9 +15,9 @@ namespace SECTH_Cliënt
         string kevin = "Kevin";
         string kevinPass = "Deketelaere";
         string mark = "Mark";
-        string markPass = "qwerty12345";
+        string markPass = "Qwerty!23456";
         string gilbert = "Gilbert";
-        string gilbertPass = "Ik ga wel vrolijk verder met star wars";
+        string gilbertPass = "StarWars";
         string root = "Root";
         string rootPass = "R00t";
 
