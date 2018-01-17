@@ -84,6 +84,7 @@ namespace SECTH_Cliënt
         {
             CommunicationFile newMessage = new CommunicationFile(language, DateTime.Now, author, textBox1.Text + Environment.NewLine);            
             clientCode.SendMessage(newMessage.ConvertToByteArray());
+            textBox1.Text = string.Empty;
         }
 
         /// <summary>
