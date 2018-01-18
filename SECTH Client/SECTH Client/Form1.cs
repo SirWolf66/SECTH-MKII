@@ -59,6 +59,7 @@ namespace SECTH_Cliënt
                     if (!usersBox.Items.Contains(result.Author))
                     {
                         Invoke(new MethodInvoker(delegate () { usersBox.Items.Add(result.Author); }));
+
                     }                    
                 }
                 else if (result.Language == leavecode)
@@ -71,6 +72,7 @@ namespace SECTH_Cliënt
                 else if (result.Language != "ERROR")
                 {
                     Invoke(new MethodInvoker(delegate () { richTextBox1.AppendText((result.WriteTime + ", " + result.Language + ": " + result.Author + ": " + result.Message + Environment.NewLine + Environment.NewLine)); }));
+                    Invoke(new MethodInvoker(delegate () { richTextBox1.ScrollToCaret(); }));
                 }
             }
         }
